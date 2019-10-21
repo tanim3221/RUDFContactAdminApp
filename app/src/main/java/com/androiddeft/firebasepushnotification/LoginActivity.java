@@ -35,22 +35,12 @@ public class LoginActivity extends AppCompatActivity {
         final Button Login = findViewById(R.id.login);
 
         final Button checknew = findViewById(R.id.checkNew);
-        final Button dairy_online = findViewById(R.id.dairy_online);
 
 
         checknew.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 UpdateChecker.checkForDialog(LoginActivity.this);
-            }
-        });
-
-        dairy_online.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Uri uri = Uri.parse(getString(R.string.dairy_link));
-                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                startActivity(intent);
             }
         });
 
