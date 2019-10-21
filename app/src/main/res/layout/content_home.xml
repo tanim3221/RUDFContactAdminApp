@@ -277,11 +277,6 @@
                         android:textSize="15dp" />
                 </LinearLayout>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1px"
-
-                    android:background="#dddddd" />
 
 
                 <View
@@ -319,6 +314,11 @@
                         android:textSize="15dp" />
                 </LinearLayout>
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+
+                    android:background="#dddddd" />
 
             </LinearLayout>
         </ScrollView>
