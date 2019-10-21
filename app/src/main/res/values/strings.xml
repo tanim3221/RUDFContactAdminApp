@@ -1,0 +1,41 @@
+<resources>
+    <string name="app_name">RUDF Contact</string>
+    <string name="prompt_email">Student ID</string>
+    <string name="prompt_password">Mobile No.</string>
+    <string name="action_sign_in">Login</string>
+    <string name="title_about_app">About App</string>
+    <string name="title_about">About RUDF</string>
+    <string name="othertext">Details RUDF</string>
+    <string name="online">RUDF Online</string>
+    <string name="check_new_update">RUDF Contact Update</string>
+    <string name="check_new_update_error">Please connect to network</string>
+    <string name="share">Share</string>
+    <string name="msg_share">RUDF Contact APP Download Link\n\n</string>
+    <string name="internet_active">Internet connection active </string>
+    <string name="call_toast">Call app opening</string>
+    <string name="email_toast">Email app opening</string>
+    <string name="other_link_open">Opening your browser</string>
+    <string name="facebook_view">Facebook Profile opening</string>
+    <string name="login_success">*** WELCOME ***</string>
+    <string name="login_unsuccess">Please ensure your mobile no or Student id</string>
+    <string name="not_fb"> Facebook app not installed </string>
+    <string name="connect_net"> Network Disconnected </string>
+    <string name="commingsoon"> Not yet added </string>
+
+    <string name="fb_grp"> Turn on mobile data or Wi-Fi to access our Facebook group </string>
+    <string name="fb_pro"> Turn on mobile data or Wi-Fi to access the Facebook profile. </string>
+    <string name="email_dialog"> Turn on mobile data or Wi-Fi for e-mail. </string>
+    <string name="navigation_drawer_close"> Close </string>
+    <string name="navigation_drawer_open"> Open </string>
+    <string name="ExecutiveMember"> Executive Member </string>
+    <string name="GeneralMember"> General Member </string>
+    <string name="AdviserMember"> Adviser </string>
+    <string name="AlumniMember"> Alumni Member </string>
+    <string name="home"> RUDF Contact </string>
+    <string name="home_nav"> Home </string>
+    <string name="online_error"> Turn on mobile data or Wi-Fi to access RUDF online. </string>
+    <string name="dairy_link"> https://www.aisiconic19.cf </string>
+    <string name="FacebookGroupSecret"> Facebook Group (Secret) </string>
+    <string name="FacebookGroupMember"> Facebook Group (Member) </string>
+
+</resources>

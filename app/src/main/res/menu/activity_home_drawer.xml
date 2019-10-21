@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single" />
+
+    <item
+        android:id="@+id/nav_home"
+        android:icon="@drawable/ic_home"
+        android:title="@string/home_nav" />
+
+    <item android:title=" Information">
+        <menu>
+            <item
+                android:id="@+id/ExecutiveMember"
+                android:icon="@drawable/ic_favorite"
+                android:title="@string/ExecutiveMember" />
+
+            <item
+                android:id="@+id/GeneralMember"
+                android:icon="@drawable/ic_supervisor"
+                android:title="@string/GeneralMember" />
+
+           </menu>
+    </item>
+
+    <item android:title="Facebook">
+        <menu>
+
+            <item
+                android:id="@+id/FacebookGroupMember"
+                android:icon="@drawable/ic_facebook"
+                android:title="@string/FacebookGroupMember" />
+            <item
+                android:id="@+id/FacebookGroupSecret"
+                android:icon="@drawable/ic_facebook"
+                android:title="@string/FacebookGroupSecret" />
+        </menu>
+    </item>
+            <item android:title="Others">
+                <menu>
+            <item
+                android:id="@+id/nav_update"
+                android:icon="@drawable/ic_update"
+                android:title="@string/check_new_update" />
+
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@drawable/ic_share"
+                android:title="@string/share" />
+            <item
+                    android:id="@+id/nav_about"
+                    android:icon="@drawable/ic_info"
+                    android:title="@string/title_about" />
+        </menu>
+    </item>
+
+</menu>
