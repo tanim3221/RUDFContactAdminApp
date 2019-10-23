@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">RUDF Contact</string>
-    <string name="prompt_email"> Enter email</string>
-    <string name="prompt_password">Enter mobile</string>
+    <string name="prompt_email"> Enter email address</string>
+    <string name="prompt_password">Enter mobile number</string>
     <string name="action_sign_in">Login</string>
     <string name="title_about_app">About</string>
     <string name="title_about">About RUDF</string>
@@ -15,7 +15,7 @@
     <string name="other_link_open">Opening your browser</string>
     <string name="facebook_view">Facebook Profile opening</string>
     <string name="login_success">*** WELCOME ***</string>
-    <string name="login_unsuccess">Please ensure your mobile no or email</string>
+    <string name="login_unsuccess">Please ensure your mobile no and email</string>
     <string name="not_fb"> Facebook app not installed </string>
     <string name="connect_net"> Network Disconnected </string>
     <string name="commingsoon">Sorry, Not yet added </string>

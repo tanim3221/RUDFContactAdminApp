@@ -88,7 +88,7 @@ public class GeneralMember extends AppCompatActivity
         final ProgressBar progress = frameLayout.findViewById(R.id.progress);
 
         liContext = this.getApplicationContext();
-        webView.loadUrl("file:///android_asset/www/teacher.html");
+        webView.loadUrl("file:///android_asset/member.html");
 
         //progressbar tinting color
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
