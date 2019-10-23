@@ -37,6 +37,8 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.blog.library.UpdateChecker;
 import com.google.android.material.navigation.NavigationView;
 
+import static com.androiddeft.firebasepushnotification.ExecutiveMember.isNetworkStatusAvialable;
+
 public class GeneralMember extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -195,35 +197,6 @@ public class GeneralMember extends AppCompatActivity
 
         });
 
-
-        /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (isNetworkStatusAvialable(getApplicationContext())) {
-                    if (isAppInstalled(liContext, "com.facebook.orca") || isAppInstalled(liContext, "com.facebook.katana")
-                            || isAppInstalled(liContext, "com.example.facebook") || isAppInstalled(liContext, "com.facebook.android")) {
-                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(fbapp)));
-                    } else {
-                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(fburl)));
-                    }
-
-                } else {
-                    String titleText = getString(R.string.fb_grp);
-                    ForegroundColorSpan foregroundColorSpan = new ForegroundColorSpan(Color.rgb(140, 140, 140));
-                    SpannableStringBuilder color = new SpannableStringBuilder(titleText);
-                    color.setSpan(foregroundColorSpan, 0, titleText.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                    AlertDialog.Builder builder = new AlertDialog.Builder(GeneralMember.this);
-                    builder.setTitle(getString(R.string.connect_net))
-                            .setMessage(color)
-                            *//*  .setNegativeButton(getString(R.string.ok_btn), null)*//*
-                            .setCancelable(true)
-                            .show();
-                }
-            }
-        });
-*/
-
         drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -257,23 +230,19 @@ public class GeneralMember extends AppCompatActivity
         return true;
     }
 
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            /*case R.id.nav_update:
-                UpdateChecker.checkForDialog(GeneralMember.this);
-                return true;*/
 
-            case R.id.nav_share:
-                Intent shareIntent = new Intent(Intent.ACTION_SEND);
-                shareIntent.setType("text/plain");
-                shareIntent.putExtra(Intent.EXTRA_SUBJECT, (getString(R.string.app_name)));
-                String shareMessage = (getString(R.string.msg_share));
-                shareMessage = shareMessage + "https://bit.ly/dairy19app";
-                shareIntent.putExtra(Intent.EXTRA_TEXT, shareMessage);
-                startActivity(Intent.createChooser(shareIntent, (getString(R.string.share))));
+            case R.id.notify:
+                Intent n = new Intent(GeneralMember.this, Notification.class);
+                startActivity(n);
                 return true;
-
+            case R.id.nav_about_app:
+                Intent h = new Intent(GeneralMember.this, AboutApp.class);
+                startActivity(h);
+                return true;
 
             default:
                 return super.onOptionsItemSelected(item);
@@ -287,20 +256,39 @@ public class GeneralMember extends AppCompatActivity
         //here is the main place where we need to work on.
         int id = item.getItemId();
         switch (id) {
-
+            case R.id.Notification:
+                Intent n = new Intent(GeneralMember.this, Notification.class);
+                startActivity(n);
+                break;
             case R.id.nav_home:
                 Intent h = new Intent(GeneralMember.this, Home.class);
                 startActivity(h);
+                break;
+            case R.id.alumni:
+                String AText = getString(R.string.commingsoon);
+                AlertDialog.Builder Abuilder = new AlertDialog.Builder(GeneralMember.this);
+                Abuilder.setMessage(AText)
+                        /*.setNegativeButton(getString(R.string.ok_btn), null)*/
+                        .setCancelable(true)
+                        .show();
+                break;
+            case R.id.adviser:
+                String VText = getString(R.string.commingsoon);
+                AlertDialog.Builder Vbuilder = new AlertDialog.Builder(GeneralMember.this);
+                Vbuilder.setMessage(VText)
+                        /*.setNegativeButton(getString(R.string.ok_btn), null)*/
+                        .setCancelable(true)
+                        .show();
                 break;
             case R.id.ExecutiveMember:
                 Intent i = new Intent(GeneralMember.this, ExecutiveMember.class);
                 startActivity(i);
                 break;
-
             case R.id.GeneralMember:
                 Intent s = new Intent(GeneralMember.this, GeneralMember.class);
                 startActivity(s);
                 break;
+
             case R.id.nav_update:
                 if (isNetworkStatusAvialable(getApplicationContext())) {
                     UpdateChecker.checkForDialog(GeneralMember.this);
@@ -317,16 +305,16 @@ public class GeneralMember extends AppCompatActivity
                             .show();
                 }
                 break;
+
             case R.id.nav_share:
                 Intent shareIntent = new Intent(Intent.ACTION_SEND);
                 shareIntent.setType("text/plain");
                 shareIntent.putExtra(Intent.EXTRA_SUBJECT, (getString(R.string.app_name)));
                 String shareMessage = (getString(R.string.msg_share));
-                shareMessage = shareMessage + "https://bit.ly/dairy19app";
+                shareMessage = shareMessage + getString(R.string.app_download_link);
                 shareIntent.putExtra(Intent.EXTRA_TEXT, shareMessage);
                 startActivity(Intent.createChooser(shareIntent, (getString(R.string.share))));
                 break;
-
             case R.id.nav_about:
                 Intent a = new Intent(GeneralMember.this, About.class);
                 startActivity(a);
@@ -349,7 +337,7 @@ public class GeneralMember extends AppCompatActivity
                     AlertDialog.Builder builder = new AlertDialog.Builder(GeneralMember.this);
                     builder.setTitle(getString(R.string.connect_net))
                             .setMessage(color)
-                            /* .setNegativeButton(getString(R.string.ok_btn), null)*/
+                            /*.setNegativeButton(getString(R.string.ok_btn), null)*/
                             .setCancelable(true)
                             .show();
                 }
@@ -377,8 +365,15 @@ public class GeneralMember extends AppCompatActivity
                             .show();
                 }
                 break;
+            case R.id.nav_feedback:
+                Intent intent = new Intent(Intent.ACTION_SEND);
+                intent.setType("text/email");
+                intent.putExtra(Intent.EXTRA_EMAIL, new String[] {getString(R.string.feedbackMail)});
+                intent.putExtra(Intent.EXTRA_SUBJECT, (getString(R.string.feedbacksub)));
+                intent.putExtra(Intent.EXTRA_TEXT,(getString(R.string.msg_feedback)));
+                startActivity(Intent.createChooser(intent, (getString(R.string.feedTitle))));
+                break;
         }
-
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

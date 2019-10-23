@@ -39,6 +39,15 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="25dp"
         android:orientation="vertical">
+        <ImageView
+            android:layout_width="45dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:adjustViewBounds="true"
+            android:contentDescription="@null"
+            android:scaleType="fitCenter"
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/rudf"/>
 
 <!--
         <ProgressBar

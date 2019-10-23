@@ -3,7 +3,7 @@ package com.androiddeft.firebasepushnotification.services;
 import android.content.Intent;
 import android.util.Log;
 
-import com.androiddeft.firebasepushnotification.Home;
+import com.androiddeft.firebasepushnotification.LoginActivity;
 import com.androiddeft.firebasepushnotification.utils.NotificationUtils;
 import com.androiddeft.firebasepushnotification.vo.NotificationVO;
 import com.google.firebase.messaging.FirebaseMessagingService;
@@ -46,7 +46,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         notificationVO.setTitle(title);
         notificationVO.setMessage(message);
 
-        Intent resultIntent = new Intent(getApplicationContext(), Home.class);
+        Intent resultIntent = new Intent(getApplicationContext(), LoginActivity.class);
         NotificationUtils notificationUtils = new NotificationUtils(getApplicationContext());
         notificationUtils.displayNotification(notificationVO, resultIntent);
         notificationUtils.playNotificationSound();
@@ -65,7 +65,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         notificationVO.setAction(action);
         notificationVO.setActionDestination(actionDestination);
 
-        Intent resultIntent = new Intent(getApplicationContext(), Home.class);
+        Intent resultIntent = new Intent(getApplicationContext(), LoginActivity.class);
 
         NotificationUtils notificationUtils = new NotificationUtils(getApplicationContext());
         notificationUtils.displayNotification(notificationVO, resultIntent);

@@ -17,8 +17,9 @@ import android.text.Html;
 
 import androidx.core.app.NotificationCompat;
 
-import com.androiddeft.firebasepushnotification.Home;
+
 import com.androiddeft.firebasepushnotification.R;
+import com.androiddeft.firebasepushnotification.SplashActivity;
 import com.androiddeft.firebasepushnotification.vo.NotificationVO;
 
 import java.io.IOException;
@@ -45,7 +46,7 @@ public class NotificationUtils {
     public NotificationUtils(Context mContext) {
         this.mContext = mContext;
         //Populate activity map
-        activityMap.put("Home", Home.class);
+        activityMap.put("SplashActivity", SplashActivity.class);
 
     }
 

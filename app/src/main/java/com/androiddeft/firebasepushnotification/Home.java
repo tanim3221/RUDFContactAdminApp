@@ -66,9 +66,6 @@ public class Home extends AppCompatActivity
         liContext = this.getApplicationContext();
 
         FrameLayout frameLayout = findViewById(R.id.layout);
-        LinearLayout linearLayout = frameLayout.findViewById(R.id.update);
-        LinearLayout linearLayout_fb = frameLayout.findViewById(R.id.facebook);
-        LinearLayout linearLayout_online = frameLayout.findViewById(R.id.online);
         LinearLayout linearLayout_alumni = frameLayout.findViewById(R.id.alumni);
         LinearLayout linearLayout_adviser = frameLayout.findViewById(R.id.adviser);
         linearLayout_adviser.setOnClickListener(new View.OnClickListener() {
@@ -76,11 +73,8 @@ public class Home extends AppCompatActivity
             public void onClick(View v) {
 
                 String titleText = getString(R.string.commingsoon);
-                ForegroundColorSpan foregroundColorSpan = new ForegroundColorSpan(Color.rgb(140, 140, 140));
-                SpannableStringBuilder color = new SpannableStringBuilder(titleText);
-                color.setSpan(foregroundColorSpan, 0, titleText.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                 AlertDialog.Builder builder = new AlertDialog.Builder(Home.this);
-                builder.setMessage(color)
+                builder.setMessage(titleText)
                         /*.setNegativeButton(getString(R.string.ok_btn), null)*/
                         .setCancelable(true)
                         .show();
@@ -91,81 +85,11 @@ public class Home extends AppCompatActivity
             public void onClick(View v) {
 
                 String titleText = getString(R.string.commingsoon);
-                ForegroundColorSpan foregroundColorSpan = new ForegroundColorSpan(Color.rgb(140, 140, 140));
-                SpannableStringBuilder color = new SpannableStringBuilder(titleText);
-                color.setSpan(foregroundColorSpan, 0, titleText.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                 AlertDialog.Builder builder = new AlertDialog.Builder(Home.this);
-                builder.setMessage(color)
+                builder.setMessage(titleText)
                         /*.setNegativeButton(getString(R.string.ok_btn), null)*/
                         .setCancelable(true)
                         .show();
-            }
-        });
-        linearLayout_online.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (isNetworkStatusAvialable(getApplicationContext())) {
-                    Uri uri = Uri.parse(getString(R.string.dairy_link));
-                    Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                    startActivity(intent);
-                } else {
-                    String titleText = getString(R.string.online_error);
-                    ForegroundColorSpan foregroundColorSpan = new ForegroundColorSpan(Color.rgb(140, 140, 140));
-                    SpannableStringBuilder color = new SpannableStringBuilder(titleText);
-                    color.setSpan(foregroundColorSpan, 0, titleText.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                    AlertDialog.Builder builder = new AlertDialog.Builder(Home.this);
-                    builder.setTitle(getString(R.string.connect_net))
-                            .setMessage(color)
-                            /*.setNegativeButton(getString(R.string.ok_btn), null)*/
-                            .setCancelable(true)
-                            .show();
-                }
-            }
-        });
-
-        linearLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (isNetworkStatusAvialable(getApplicationContext())) {
-                    UpdateChecker.checkForDialog(Home.this);
-                } else {
-                    String titleText = getString(R.string.check_new_update_error);
-                    ForegroundColorSpan foregroundColorSpan = new ForegroundColorSpan(Color.rgb(140, 140, 140));
-                    SpannableStringBuilder color = new SpannableStringBuilder(titleText);
-                    color.setSpan(foregroundColorSpan, 0, titleText.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                    AlertDialog.Builder builder = new AlertDialog.Builder(Home.this);
-                    builder.setTitle(getString(R.string.connect_net))
-                            .setMessage(color)
-                            /*.setNegativeButton(getString(R.string.ok_btn), null)*/
-                            .setCancelable(true)
-                            .show();
-                }
-            }
-        });
-
-        linearLayout_fb.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (isNetworkStatusAvialable(getApplicationContext())) {
-                    if (isAppInstalled(liContext, "com.facebook.orca") || isAppInstalled(liContext, "com.facebook.katana")
-                            || isAppInstalled(liContext, "com.example.facebook") || isAppInstalled(liContext, "com.facebook.android")) {
-                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(fbapp)));
-                    } else {
-                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(fburl)));
-                    }
-
-                } else {
-                    String titleText = getString(R.string.fb_grp);
-                    ForegroundColorSpan foregroundColorSpan = new ForegroundColorSpan(Color.rgb(140, 140, 140));
-                    SpannableStringBuilder color = new SpannableStringBuilder(titleText);
-                    color.setSpan(foregroundColorSpan, 0, titleText.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                    AlertDialog.Builder builder = new AlertDialog.Builder(Home.this);
-                    builder.setTitle(getString(R.string.connect_net))
-                            .setMessage(color)
-                            /*.setNegativeButton(getString(R.string.ok_btn), null)*/
-                            .setCancelable(true)
-                            .show();
-                }
             }
         });
 
@@ -197,6 +121,9 @@ public class Home extends AppCompatActivity
     public void Executive (View view) {
         doAction(ExecutiveMember.class);
     }
+    public void Notify (View view) {
+        doAction(Notification.class);
+    }
 
     public void General (View view) {
         doAction(GeneralMember.class);
@@ -222,24 +149,24 @@ public class Home extends AppCompatActivity
         getMenuInflater().inflate(R.menu.home, menu);
         return true;
     }
-
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        MenuItem menuItem = menu.findItem(R.id.notify);
+        menuItem.setVisible(false);
+        return true;
+    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-           /* case R.id.nav_update:
-                UpdateChecker.checkForDialog(Home.this);
-                return true;*/
 
-            case R.id.nav_share:
-                Intent shareIntent = new Intent(Intent.ACTION_SEND);
-                shareIntent.setType("text/plain");
-                shareIntent.putExtra(Intent.EXTRA_SUBJECT, (getString(R.string.app_name)));
-                String shareMessage = (getString(R.string.msg_share));
-                shareMessage = shareMessage + "https://bit.ly/dairy19app";
-                shareIntent.putExtra(Intent.EXTRA_TEXT, shareMessage);
-                startActivity(Intent.createChooser(shareIntent, (getString(R.string.share))));
+            case R.id.notify:
+                Intent n = new Intent(Home.this, Notification.class);
+                startActivity(n);
                 return true;
-
+            case R.id.nav_about_app:
+                Intent h = new Intent(Home.this, AboutApp.class);
+                startActivity(h);
+                return true;
 
             default:
                 return super.onOptionsItemSelected(item);
@@ -253,10 +180,29 @@ public class Home extends AppCompatActivity
         //here is the main place where we need to work on.
         int id = item.getItemId();
         switch (id) {
-
+            case R.id.Notification:
+                Intent n = new Intent(Home.this, Notification.class);
+                startActivity(n);
+                break;
             case R.id.nav_home:
                 Intent h = new Intent(Home.this, Home.class);
                 startActivity(h);
+                break;
+            case R.id.alumni:
+                String AText = getString(R.string.commingsoon);
+                AlertDialog.Builder Abuilder = new AlertDialog.Builder(Home.this);
+                Abuilder.setMessage(AText)
+                        /*.setNegativeButton(getString(R.string.ok_btn), null)*/
+                        .setCancelable(true)
+                        .show();
+                break;
+            case R.id.adviser:
+                String VText = getString(R.string.commingsoon);
+                AlertDialog.Builder Vbuilder = new AlertDialog.Builder(Home.this);
+                Vbuilder.setMessage(VText)
+                        /*.setNegativeButton(getString(R.string.ok_btn), null)*/
+                        .setCancelable(true)
+                        .show();
                 break;
             case R.id.ExecutiveMember:
                 Intent i = new Intent(Home.this, ExecutiveMember.class);
@@ -289,7 +235,7 @@ public class Home extends AppCompatActivity
                 shareIntent.setType("text/plain");
                 shareIntent.putExtra(Intent.EXTRA_SUBJECT, (getString(R.string.app_name)));
                 String shareMessage = (getString(R.string.msg_share));
-                shareMessage = shareMessage + "https://bit.ly/dairy19app";
+                shareMessage = shareMessage + getString(R.string.app_download_link);
                 shareIntent.putExtra(Intent.EXTRA_TEXT, shareMessage);
                 startActivity(Intent.createChooser(shareIntent, (getString(R.string.share))));
                 break;
@@ -342,6 +288,14 @@ public class Home extends AppCompatActivity
                             .setCancelable(true)
                             .show();
                 }
+                break;
+            case R.id.nav_feedback:
+                Intent intent = new Intent(Intent.ACTION_SEND);
+                intent.setType("text/email");
+                intent.putExtra(Intent.EXTRA_EMAIL, new String[] {getString(R.string.feedbackMail)});
+                intent.putExtra(Intent.EXTRA_SUBJECT, (getString(R.string.feedbacksub)));
+                intent.putExtra(Intent.EXTRA_TEXT,(getString(R.string.msg_feedback)));
+                startActivity(Intent.createChooser(intent, (getString(R.string.feedTitle))));
                 break;
         }
 

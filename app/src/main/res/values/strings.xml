@@ -1,12 +1,12 @@
 <resources>
     <string name="app_name">RUDF Contact</string>
-    <string name="prompt_email">Student ID</string>
-    <string name="prompt_password">Mobile No.</string>
+    <string name="prompt_email"> Enter email</string>
+    <string name="prompt_password">Enter mobile</string>
     <string name="action_sign_in">Login</string>
-    <string name="title_about_app">About App</string>
+    <string name="title_about_app">About</string>
     <string name="title_about">About RUDF</string>
     <string name="othertext">Details RUDF</string>
-    <string name="check_new_update">RUDF Contact Update</string>
+    <string name="check_new_update">Check new update</string>
     <string name="check_new_update_error">Please connect to network</string>
     <string name="share">Share</string>
     <string name="msg_share">RUDF Contact APP Download Link\n\n</string>
@@ -15,11 +15,10 @@
     <string name="other_link_open">Opening your browser</string>
     <string name="facebook_view">Facebook Profile opening</string>
     <string name="login_success">*** WELCOME ***</string>
-    <string name="login_unsuccess">Please ensure your mobile no or Student id</string>
+    <string name="login_unsuccess">Please ensure your mobile no or email</string>
     <string name="not_fb"> Facebook app not installed </string>
     <string name="connect_net"> Network Disconnected </string>
-    <string name="commingsoon"> Not yet added </string>
-
+    <string name="commingsoon">Sorry, Not yet added </string>
     <string name="fb_grp"> Turn on mobile data or Wi-Fi to access our Facebook group </string>
     <string name="fb_pro"> Turn on mobile data or Wi-Fi to access the Facebook profile. </string>
     <string name="email_dialog"> Turn on mobile data or Wi-Fi for e-mail. </string>
@@ -35,5 +34,49 @@
     <string name="dairy_link"> https://www.aisiconic19.cf </string>
     <string name="FacebookGroupSecret"> Facebook Group (Secret) </string>
     <string name="FacebookGroupMember"> Facebook Group (Member) </string>
+    <string name="information">Informations</string>
+    <string name="facebook_group">Facebook Group</string>
+    <string name="others">Others</string>
+    <string name="version_information">Version Information</string>
+    <string name="rudf_title">Rajshahi University Debating Forum (RUDF)</string>
+    <string name="ru_name">University of Rajshahi</string>
+    <string name="msg_feedback">Dear Developer,\n\n\n\n\n\n\n Best regards,</string>
+    <string name="about_dev"><![CDATA[<h3>Developer</h3><hr>Saklayen Ahmed<br>Department of Accounting and Information Systems<br>University of Rajshshi.]]> </string>
+   <string name="notifications">Notifications</string>
+    <string name="app_download_link">https://bit.ly/dairy19app</string>
+    <string name="about_app"> <![CDATA[  <h3> Some informations about app: </h3>
+<strong>#</strong> You can search members easily and browse catagory of members of RUDF with navigation bar.<br>
+<strong>#</strong> Search values- Name, Phone Number, RUDF position (such as- CEM, ACM, General Member) etc.<br>
+<strong>#</strong> In Accordance with position all members are catagorised.<br>
+<strong>#</strong> You can navigate all facebook Groups and pages with this app.<br>
+<strong>#</strong> Feedback is a valuable aseet for developing apps. You can send your feedback or contact with developer by "Feedback" Button for more updates with amazing features.<br>
+<strong>#</strong> App update process is very easy, You can update your app while update is available by "Check new update" button above here.<br> ]]></string>
+    <string name="feedback">Feedback</string>
+    <string name="feedbackMail">astanim.3221@gmail.com</string>
+    <string name="feedbacksub">RUDF Contact Feedback</string>
+    <string name="feedTitle">Feedback</string>
+    <string name="misson">Mission</string>
+    <string name="misson_details">Express Yourself - it is the slogan of this organization. Through debating, creating knowledgeable, self-oriented, confident, patriotic manpower is the main mission.</string>
+    <string name="Overview">Organization Overview</string>
+    <string name="Overview_details">Its the premium debating organization of the University of Rajshahi RUDF is the only debating forum of Business Studies Faculty in Rajshahi University which was formed on February 6, 2008 by some energetic, talented and up-to-date students of Business Studies Faculty. It is only a debating forum that is representing our Business Studies Faculty to the others university in Bangladesh. It is totally a non-political forum wants to make us a perfect, logical and relevant person.</string>
+    <string name="Information">General Information</string>
+    <string name="Information_details">BFDF is nationally renowned debating forum. It is continuously working for the development of the students. For celebrating its 1st Anniversary in 2009, it organized the largest ever event of RU, the Career Planning Seminar. In its 2nd Anniversary in 2010 we organized National Debate Championship first time in RU. Now it is the time to celebrate its 3rd Anniversary with the 1st National Debate Festival in 2011</string>
+
+    <string name="Date">Founding Date</string>
+    <string name="Date_details">February 6, 2008</string>
+
+    <string name="Call">Call</string>
+    <string name="Call_details">01786-387816</string>
+    <string name="Email">Email</string>
+    <string name="Email_details">bfdf.ru@gmail.com</string>
+
+
+
+
+
+
+
+
+
 
 </resources>

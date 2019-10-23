@@ -12,7 +12,7 @@ class UpdateDialog {
     static void show(final Context context, String content, final String downloadUrl) {
         if (isContextValid(context)) {
             new AlertDialog.Builder(context)
-                    .setIcon(R.drawable.ic_support)
+                    .setIcon(R.mipmap.ic_launcher)
                     .setTitle(R.string.android_auto_update_dialog_title)
                     .setMessage(content)
                     .setPositiveButton(R.string.android_auto_update_dialog_btn_download, new DialogInterface.OnClickListener() {

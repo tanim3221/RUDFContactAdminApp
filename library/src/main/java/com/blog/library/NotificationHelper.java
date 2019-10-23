@@ -91,7 +91,7 @@ public class NotificationHelper extends ContextWrapper {
 
     private int getSmallIcon() {
         // Set the icon of nofication directly read the icon of the millet push configuration
-        int icon = getResources().getIdentifier("ic_support", "mipmap", getPackageName());
+        int icon = getResources().getIdentifier("ic_launcher", "mipmap", getPackageName());
         if (icon == 0) {
             icon = getApplicationInfo().icon;
         }
@@ -100,7 +100,7 @@ public class NotificationHelper extends ContextWrapper {
     }
 
     private Bitmap getLargeIcon() {
-        int bigIcon = getResources().getIdentifier("ic_support", "mipmap", getPackageName());
+        int bigIcon = getResources().getIdentifier("ic_launcher", "mipmap", getPackageName());
         if (bigIcon != 0) {
             return BitmapFactory.decodeResource(getResources(), bigIcon);
         }
