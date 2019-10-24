@@ -36,13 +36,13 @@
         <menu>
 
             <item
-                android:id="@+id/FacebookGroupMember"
+                android:id="@+id/FacebookPage"
                 android:icon="@drawable/ic_facebook"
-                android:title="@string/FacebookGroupMember" />
+                android:title="@string/FacebookPage" />
             <item
-                android:id="@+id/FacebookGroupSecret"
+                android:id="@+id/FacebookGroup"
                 android:icon="@drawable/ic_facebook"
-                android:title="@string/FacebookGroupSecret" />
+                android:title="@string/FacebookGroup" />
         </menu>
     </item>
             <item android:title="@string/others">

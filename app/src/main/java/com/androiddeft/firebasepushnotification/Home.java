@@ -39,8 +39,10 @@ public class Home extends AppCompatActivity
     ScrollView scrollView;
     Toolbar toolbar = null;
     int action = 0;
-    String fbapp = "fb://group/662549573867987";
-    String fburl = "https://www.facebook.com/groups/662549573867987";
+    String fbapp = "fb://group/49880688703";
+    String fburl = "https://www.facebook.com/groups/bfdf.ru/";
+    String pageApp = "fb://page/169680089735915";
+    String pageurl = "https://www.facebook.com/rubfdf/";
     private Context liContext = null;
 
     public static boolean isAppInstalled(Context context, String packageName) {
@@ -244,7 +246,7 @@ public class Home extends AppCompatActivity
                 startActivity(a);
                 break;
 
-            case R.id.FacebookGroupSecret:
+            case R.id.FacebookGroup:
                 if (isNetworkStatusAvialable(getApplicationContext())) {
                     if (isAppInstalled(liContext, "com.facebook.orca") || isAppInstalled(liContext, "com.facebook.katana")
                             || isAppInstalled(liContext, "com.example.facebook") || isAppInstalled(liContext, "com.facebook.android")) {
@@ -267,13 +269,13 @@ public class Home extends AppCompatActivity
                 }
                 break;
 
-            case R.id.FacebookGroupMember:
+            case R.id.FacebookPage:
                 if (isNetworkStatusAvialable(getApplicationContext())) {
                     if (isAppInstalled(liContext, "com.facebook.orca") || isAppInstalled(liContext, "com.facebook.katana")
                             || isAppInstalled(liContext, "com.example.facebook") || isAppInstalled(liContext, "com.facebook.android")) {
-                        startActivity(new Intent (Intent.ACTION_VIEW, Uri.parse(fbapp)));
+                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(pageApp)));
                     } else {
-                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(fburl)));
+                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(pageurl)));
                     }
 
                 } else {

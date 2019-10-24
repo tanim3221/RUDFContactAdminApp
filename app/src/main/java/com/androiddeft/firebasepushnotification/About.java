@@ -9,7 +9,6 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.text.Html;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
@@ -17,7 +16,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
-import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
@@ -26,7 +24,6 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import com.blog.library.AppUtils;
 import com.blog.library.UpdateChecker;
 import com.google.android.material.navigation.NavigationView;
 
@@ -37,8 +34,10 @@ public class About extends AppCompatActivity
     DrawerLayout drawer;
     NavigationView navigationView;
     Toolbar toolbar = null;
-    String fbapp = "fb://group/662549573867987";
-    String fburl = "https://www.facebook.com/groups/662549573867987";
+    String fbapp = "fb://group/49880688703";
+    String fburl = "https://www.facebook.com/groups/bfdf.ru/";
+    String pageApp = "fb://page/169680089735915";
+    String pageurl = "https://www.facebook.com/rubfdf/";
     private Context liContext = null;
 
     public static boolean isAppInstalled(Context context, String packageName) {
@@ -228,7 +227,7 @@ public class About extends AppCompatActivity
                 startActivity(a);
                 break;
 
-            case R.id.FacebookGroupSecret:
+            case R.id.FacebookGroup:
                 if (isNetworkStatusAvialable(getApplicationContext())) {
                     if (isAppInstalled(liContext, "com.facebook.orca") || isAppInstalled(liContext, "com.facebook.katana")
                             || isAppInstalled(liContext, "com.example.facebook") || isAppInstalled(liContext, "com.facebook.android")) {
@@ -251,13 +250,13 @@ public class About extends AppCompatActivity
                 }
                 break;
 
-            case R.id.FacebookGroupMember:
+            case R.id.FacebookPage:
                 if (isNetworkStatusAvialable(getApplicationContext())) {
                     if (isAppInstalled(liContext, "com.facebook.orca") || isAppInstalled(liContext, "com.facebook.katana")
                             || isAppInstalled(liContext, "com.example.facebook") || isAppInstalled(liContext, "com.facebook.android")) {
-                        startActivity(new Intent (Intent.ACTION_VIEW, Uri.parse(fbapp)));
+                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(pageApp)));
                     } else {
-                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(fburl)));
+                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(pageurl)));
                     }
 
                 } else {
