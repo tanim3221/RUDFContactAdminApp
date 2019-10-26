@@ -135,6 +135,10 @@ public class Home extends AppCompatActivity
         doAction(About.class);
     }
 
+    public void Profile(View view) {
+        doAction(ProfileActivity.class);
+    }
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -153,7 +157,7 @@ public class Home extends AppCompatActivity
     }
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        MenuItem menuItem = menu.findItem(R.id.notify);
+        MenuItem menuItem = menu.findItem(R.id.pro);
         menuItem.setVisible(false);
         return true;
     }
@@ -168,6 +172,10 @@ public class Home extends AppCompatActivity
             case R.id.nav_about_app:
                 Intent h = new Intent(Home.this, AboutApp.class);
                 startActivity(h);
+                return true;
+            case R.id.pro:
+                Intent p = new Intent(Home.this, ProfileActivity.class);
+                startActivity(p);
                 return true;
 
             default:

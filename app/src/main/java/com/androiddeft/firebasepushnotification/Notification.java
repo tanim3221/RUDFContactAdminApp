@@ -48,7 +48,7 @@ public class Notification extends AppCompatActivity
     NavigationView navigationView;
     Toolbar toolbar = null;
     private SwipeRefreshLayout swipeRefreshLayout;
-    private String currentUrl = "http://rudf.6te.net/notice/view-notice.php";
+    private String currentUrl = "http://rudf.6te.net/webapp/database/view/notice.php";
     String fbapp = "fb://group/49880688703";
     String fburl = "https://www.facebook.com/groups/bfdf.ru/";
     String pageApp = "fb://page/169680089735915";
@@ -95,7 +95,7 @@ public class Notification extends AppCompatActivity
                 LoadWeb(currentUrl);
             }
         });
-        LoadWeb("http://rudf.6te.net/notice/view-notice.php");
+        LoadWeb("http://rudf.6te.net/webapp/database/view/notice.php");
 
         drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -132,7 +132,12 @@ public class Notification extends AppCompatActivity
         webView.setScrollBarStyle(WebView.SCROLLBARS_INSIDE_OVERLAY);
         webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
         webView.setScrollbarFadingEnabled(true);
-        webView.getSettings().setCacheMode(WebSettings.LOAD_DEFAULT);
+            if (isNetworkStatusAvialable(getApplicationContext())) {
+                webView.getSettings().setCacheMode(WebSettings.LOAD_DEFAULT);
+            } else {
+                webView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
+            }
+
         webView.setWebViewClient(new WebViewClient());
         webView.loadUrl(url);
         webView.setOnLongClickListener(new View.OnLongClickListener() {
@@ -160,7 +165,7 @@ public class Notification extends AppCompatActivity
             }
 
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                String defaulturl = "http://rudf.6te.net/notice/view-notice.php";
+                String defaulturl = "http://rudf.6te.net/webapp/database/view/notice.php";
                 currentUrl = url;
                 if (url != null && url.startsWith(defaulturl)) {
                     return false;
@@ -280,6 +285,10 @@ public class Notification extends AppCompatActivity
             case R.id.nav_about_app:
                 Intent h = new Intent(Notification.this, AboutApp.class);
                 startActivity(h);
+                return true;
+            case R.id.pro:
+                Intent p = new Intent(Notification.this, ProfileActivity.class);
+                startActivity(p);
                 return true;
 
             default:

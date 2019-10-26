@@ -150,6 +150,10 @@ public class About extends AppCompatActivity
                 Intent h = new Intent(About.this, AboutApp.class);
                 startActivity(h);
                 return true;
+            case R.id.pro:
+                Intent p = new Intent(About.this, ProfileActivity.class);
+                startActivity(p);
+                return true;
 
             default:
                 return super.onOptionsItemSelected(item);

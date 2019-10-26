@@ -41,7 +41,7 @@
     <string name="rudf_title">Rajshahi University Debating Forum (RUDF)</string>
     <string name="ru_name">University of Rajshahi</string>
     <string name="msg_feedback">Dear Developer,\n\n\n\n\n\n\n Best regards,</string>
-     <string name="notifications">Notifications</string>
+    <string name="notifications">Notifications</string>
     <string name="app_download_link">https://bit.ly/rudfapp</string>
     <string name="feedback">Feedback</string>
     <string name="feedbackMail">astanim.3221@gmail.com</string>
@@ -68,5 +68,8 @@
     <string name="fb_page_app">fb://page/169680089735915</string>
     <string name="fb_page_url">https://www.facebook.com/rubfdf/</string>
     <string name="notification_url">http://rudf.6te.net/notice/view-notice.php</string>
+    <string name="mypro">My Profile</string>
+    <string name="my_profile">My Profile</string>
+    <string name="logout">Logout</string>
 
 </resources>

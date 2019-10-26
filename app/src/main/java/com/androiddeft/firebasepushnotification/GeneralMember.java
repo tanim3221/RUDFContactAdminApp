@@ -1,5 +1,6 @@
 package com.androiddeft.firebasepushnotification;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -18,6 +19,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.webkit.WebResourceError;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -33,6 +36,7 @@ import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.blog.library.UpdateChecker;
 import com.google.android.material.navigation.NavigationView;
@@ -43,6 +47,8 @@ public class GeneralMember extends AppCompatActivity
     DrawerLayout drawer;
     NavigationView navigationView;
     Toolbar toolbar = null;
+    private SwipeRefreshLayout swipeRefreshLayout;
+    private String currentUrl = "http://rudf.6te.net/webapp/database/view/member.php";
     String fbapp = "fb://group/49880688703";
     String fburl = "https://www.facebook.com/groups/bfdf.ru/";
     String pageApp = "fb://page/169680089735915";
@@ -81,15 +87,30 @@ public class GeneralMember extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         liContext = this.getApplicationContext();
+        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
+        swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                LoadWeb(currentUrl);
+            }
+        });
+        LoadWeb("http://rudf.6te.net/webapp/database/view/member.php");
 
+        drawer = findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.setDrawerListener(toggle);
+        toggle.syncState();
+
+        navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    public void LoadWeb(String url) {
         FrameLayout frameLayout = findViewById(R.id.layout);
-
-        WebView webView = frameLayout.findViewById(R.id.webView);
+        final WebView webView = frameLayout.findViewById(R.id.webView);
         final ProgressBar progress = frameLayout.findViewById(R.id.progress);
-
-        liContext = this.getApplicationContext();
-        webView.loadUrl("file:///android_asset/member.html");
-
         //progressbar tinting color
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
             Drawable wrapDrawable = DrawableCompat.wrap(progress.getIndeterminateDrawable());
@@ -112,8 +133,13 @@ public class GeneralMember extends AppCompatActivity
         webView.setScrollBarStyle(WebView.SCROLLBARS_INSIDE_OVERLAY);
         webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
         webView.setScrollbarFadingEnabled(true);
-        webView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ONLY);
+        if (isNetworkStatusAvialable(getApplicationContext())) {
+            webView.getSettings().setCacheMode(WebSettings.LOAD_DEFAULT);
+        } else {
+            webView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
+        }
         webView.setWebViewClient(new WebViewClient());
+        webView.loadUrl(url);
         webView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -124,8 +150,26 @@ public class GeneralMember extends AppCompatActivity
         });
         webView.setWebViewClient(new WebViewClient() {
 
+            @Override
+            public void onReceivedError(WebView view, int errorCode, String description,
+                                        String failingUrl) {
+                webView.loadUrl("about:blank");
+                super.onReceivedError(view, errorCode, description, failingUrl);
+            }
+
+            @Override
+            @TargetApi(Build.VERSION_CODES.M)
+            public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
+                webView.loadUrl("about:blank");
+                super.onReceivedError(view, request, error);
+            }
+
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                if (url.startsWith("tel:")) {
+                String defaulturl = "http://rudf.6te.net/webapp/database/view/member.php";
+                currentUrl = url;
+                if (url != null && url.startsWith(defaulturl)) {
+                    return false;
+                } else if (url.startsWith("tel:")) {
                     Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse(url));
                     startActivity(intent);
 
@@ -192,19 +236,13 @@ public class GeneralMember extends AppCompatActivity
 
             public void onPageFinished(WebView view, String url) {
                 progress.setVisibility(View.GONE);
+                swipeRefreshLayout.setRefreshing(false);
 
             }
 
         });
 
-        drawer = findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
-        toggle.syncState();
 
-        navigationView = findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
     }
 
     private void hideitem() {
@@ -230,7 +268,12 @@ public class GeneralMember extends AppCompatActivity
         return true;
     }
 
-
+    /* @Override
+     public boolean onPrepareOptionsMenu(Menu menu) {
+         MenuItem menuItem = menu.findItem(R.id.notify);
+         menuItem.setVisible(false);
+         return true;
+     }*/
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -242,6 +285,10 @@ public class GeneralMember extends AppCompatActivity
             case R.id.nav_about_app:
                 Intent h = new Intent(GeneralMember.this, AboutApp.class);
                 startActivity(h);
+                return true;
+            case R.id.pro:
+                Intent p = new Intent(GeneralMember.this, ProfileActivity.class);
+                startActivity(p);
                 return true;
 
             default:
