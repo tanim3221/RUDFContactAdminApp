@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
@@ -14,9 +15,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
@@ -62,6 +65,8 @@ public class Home extends AppCompatActivity
                     WindowManager.LayoutParams.FLAG_FULLSCREEN);
         }
         setContentView(R.layout.activity_home);
+
+
         hideitem();
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -70,6 +75,26 @@ public class Home extends AppCompatActivity
         FrameLayout frameLayout = findViewById(R.id.layout);
         LinearLayout linearLayout_alumni = frameLayout.findViewById(R.id.alumni);
         LinearLayout linearLayout_adviser = frameLayout.findViewById(R.id.adviser);
+        final Button checknew = frameLayout.findViewById(R.id.checkNew);
+        checknew.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                UpdateChecker.checkForDialog(Home.this);
+            }
+        });
+
+        if (isNetworkStatusAvialable(getApplicationContext())) {
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    checknew.performClick();
+                }
+            }, 1);
+        } else {
+
+            Toast.makeText(getApplicationContext(), (getString(R.string.connect_net)), Toast.LENGTH_LONG).cancel();
+        }
+
         linearLayout_adviser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

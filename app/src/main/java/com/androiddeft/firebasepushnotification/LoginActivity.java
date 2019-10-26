@@ -31,6 +31,27 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+
+        final Button checknew = (Button) findViewById(R.id.checkNew);
+        checknew.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                UpdateChecker.checkForDialog(LoginActivity.this);
+            }
+        });
+
+        if (isNetworkStatusAvialable(getApplicationContext())) {
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    checknew.performClick();
+                }
+            }, 1);
+        } else {
+
+            Toast.makeText(getApplicationContext(), (getString(R.string.connect_net)), Toast.LENGTH_LONG).cancel();
+        }
+
         if (SharedPrefManager.getInstance(this).isLoggedIn()) {
             finish();
             startActivity(new Intent(this, Home.class));

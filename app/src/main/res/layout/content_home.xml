@@ -284,8 +284,17 @@
 
                     android:background="#dddddd" />
 
+
             </LinearLayout>
+
+
         </ScrollView>
+
+        <Button
+            android:id="@+id/checkNew"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone" />
     </FrameLayout>
 
     <include layout="@layout/app_bar_home" />
