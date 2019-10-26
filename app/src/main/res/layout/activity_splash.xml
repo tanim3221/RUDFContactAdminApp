@@ -66,8 +66,8 @@
             android:adjustViewBounds="true"
             android:contentDescription="@null"
             android:scaleType="fitCenter"
-            android:textSize="16dp"
-            android:text="RUDF Contact"/>
+            android:text="@string/app_name"
+            android:textSize="16dp" />
     </LinearLayout>
 
 </RelativeLayout>

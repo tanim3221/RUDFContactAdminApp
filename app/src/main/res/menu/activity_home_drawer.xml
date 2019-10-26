@@ -32,7 +32,7 @@
            </menu>
     </item>
 
-    <item android:title="@string/facebook_group">
+    <item android:title="@string/facebook">
         <menu>
 
             <item

@@ -1,6 +1,8 @@
 package com.androiddeft.firebasepushnotification;
 
 import android.content.Intent;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -13,6 +15,9 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
+
 import com.blog.library.UpdateChecker;
 
 import org.json.JSONException;
@@ -70,6 +75,18 @@ public class LoginActivity extends AppCompatActivity {
                 userLogin();
             }
         });
+
+        ProgressBar progressBar = findViewById(R.id.progressBar);
+
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
+            Drawable wrapDrawable = DrawableCompat.wrap(progressBar.getIndeterminateDrawable());
+            DrawableCompat.setTint(wrapDrawable, ContextCompat.getColor(getApplicationContext(),
+                    R.color.colorPrimary));
+            progressBar.setIndeterminateDrawable(DrawableCompat.unwrap(wrapDrawable));
+
+        } else {
+            progressBar.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
+        }
     }
 
     private void userLogin() {
@@ -79,13 +96,13 @@ public class LoginActivity extends AppCompatActivity {
 
         //validating inputs
         if (TextUtils.isEmpty(username)) {
-            editTextUsername.setError("Please enter your username or email");
+            editTextUsername.setError("Please enter your email");
             editTextUsername.requestFocus();
             return;
         }
 
         if (TextUtils.isEmpty(mobile)) {
-            editTextPassword.setError("Please enter your mobile");
+            editTextPassword.setError("Please enter your mobile number");
             editTextPassword.requestFocus();
             return;
         }

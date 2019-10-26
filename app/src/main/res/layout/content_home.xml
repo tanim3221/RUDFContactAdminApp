@@ -64,7 +64,7 @@
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:padding="8dp"
-                    android:text="Informations"
+                    android:text="@string/informations_home"
                     android:background="@color/colorPrimary"
                     android:textColor="@android:color/white"
                     android:textSize="17dp" />

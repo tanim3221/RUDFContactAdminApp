@@ -83,6 +83,10 @@ public class GeneralMember extends AppCompatActivity
                     WindowManager.LayoutParams.FLAG_FULLSCREEN);
         }
         setContentView(R.layout.activity_general);
+        if (!SharedPrefManager.getInstance(this).isLoggedIn()) {
+            finish();
+            startActivity(new Intent(this, LoginActivity.class));
+        }
         hideitem();
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

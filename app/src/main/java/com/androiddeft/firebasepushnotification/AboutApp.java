@@ -20,7 +20,10 @@ public class AboutApp extends AppCompatActivity {
                     WindowManager.LayoutParams.FLAG_FULLSCREEN);
         }
         setContentView(R.layout.activity_about_app);
-
+        if (!SharedPrefManager.getInstance(this).isLoggedIn()) {
+            finish();
+            startActivity(new Intent(this, LoginActivity.class));
+        }
         Button button = findViewById(R.id.feedback);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
