@@ -20,8 +20,8 @@ android {
         applicationId "com.androiddeft.firebasepushnotification"
         minSdkVersion 17
         targetSdkVersion 28
-        versionCode 10
-        versionName '1.0.110'
+        versionCode 11
+        versionName '1.0.111'
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         signingConfig signingConfigs.release
     }

@@ -133,6 +133,9 @@ public class GeneralMember extends AppCompatActivity
         webView.getSettings().setLoadWithOverviewMode(true);
         webView.getSettings().setUseWideViewPort(true);
         webView.getSettings().setJavaScriptEnabled(true);
+        webView.getSettings().setAppCacheMaxSize(10 * 1024 * 1024);
+        webView.getSettings().setAppCachePath(getApplicationContext().getCacheDir().getAbsolutePath());
+        webView.getSettings().setAllowFileAccess(true);
         webView.getSettings().setAppCacheEnabled(true);
         webView.setScrollBarStyle(WebView.SCROLLBARS_INSIDE_OVERLAY);
         webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
@@ -140,7 +143,7 @@ public class GeneralMember extends AppCompatActivity
         if (isNetworkStatusAvialable(getApplicationContext())) {
             webView.getSettings().setCacheMode(WebSettings.LOAD_DEFAULT);
         } else {
-            webView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
+            webView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ONLY);
         }
         webView.setWebViewClient(new WebViewClient());
         webView.loadUrl(url);
