@@ -25,7 +25,8 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 
-import static com.androiddeft.firebasepushnotification.ExecutiveMember.isNetworkStatusAvialable;
+import static com.androiddeft.firebasepushnotification.WebviewActivity.isNetworkStatusAvialable;
+
 
 public class LoginActivity extends AppCompatActivity {
 

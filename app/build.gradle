@@ -20,8 +20,8 @@ android {
         applicationId "com.androiddeft.firebasepushnotification"
         minSdkVersion 17
         targetSdkVersion 28
-        versionCode 11
-        versionName '1.0.111'
+        versionCode 12
+        versionName '1.0.112'
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         signingConfig signingConfigs.release
     }
@@ -39,7 +39,6 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'com.google.android.material:material:1.0.0'
     implementation 'androidx.annotation:annotation:1.1.0'
-    implementation 'com.android.support:design:27.1.1'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0'
     implementation 'androidx.vectordrawable:vectordrawable:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'

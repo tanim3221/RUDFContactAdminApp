@@ -31,7 +31,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.blog.library.UpdateChecker;
 import com.google.android.material.navigation.NavigationView;
 
-import static com.androiddeft.firebasepushnotification.ExecutiveMember.isNetworkStatusAvialable;
+import static com.androiddeft.firebasepushnotification.WebviewActivity.isNetworkStatusAvialable;
 
 
 public class Home extends AppCompatActivity
@@ -42,6 +42,11 @@ public class Home extends AppCompatActivity
     ScrollView scrollView;
     Toolbar toolbar = null;
     int action = 0;
+    String alumni = "http://rudf.6te.net/webapp/database/view/alumni.php";
+    String executive = "http://rudf.6te.net/webapp/database/view/executive.php";
+    String general = "http://rudf.6te.net/webapp/database/view/member.php";
+    String adviser = "http://rudf.6te.net/webapp/database/view/adviser.php";
+    String notice = "http://rudf.6te.net/webapp/database/view/notice.php";
     String fbapp = "fb://group/49880688703";
     String fburl = "https://www.facebook.com/groups/bfdf.ru/";
     String pageApp = "fb://page/169680089735915";
@@ -78,7 +83,11 @@ public class Home extends AppCompatActivity
         FrameLayout frameLayout = findViewById(R.id.layout);
         LinearLayout linearLayout_alumni = frameLayout.findViewById(R.id.alumni);
         LinearLayout linearLayout_adviser = frameLayout.findViewById(R.id.adviser);
+        LinearLayout linearLayout_executive = frameLayout.findViewById(R.id.executive);
+        LinearLayout linearLayout_general = frameLayout.findViewById(R.id.general);
+        LinearLayout linearLayout_notification = frameLayout.findViewById(R.id.notification);
         final Button checknew = frameLayout.findViewById(R.id.checkNew);
+
         checknew.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -98,13 +107,46 @@ public class Home extends AppCompatActivity
             Toast.makeText(getApplicationContext(), (getString(R.string.connect_net)), Toast.LENGTH_LONG).cancel();
         }
 
+        linearLayout_executive.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent i = new Intent(getApplicationContext(), WebviewActivity.class);
+                i.putExtra("url", (executive));
+                setTitle("Executive Member");
+                startActivity(i);
+            }
+        });
+
+        linearLayout_notification.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent i = new Intent(getApplicationContext(), WebviewActivity.class);
+                i.putExtra("url", (notice));
+                setTitle("Notifications");
+                startActivity(i);
+            }
+        });
+
+        linearLayout_general.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent i = new Intent(getApplicationContext(), WebviewActivity.class);
+                i.putExtra("url", (general));
+                setTitle("General Member");
+                startActivity(i);
+            }
+        });
+
         linearLayout_adviser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                String titleText = getString(R.string.commingsoon);
-                AlertDialog.Builder builder = new AlertDialog.Builder(Home.this);
-                builder.setMessage(titleText)
+                String notify = getString(R.string.commingsoon);
+                AlertDialog.Builder alert = new AlertDialog.Builder(Home.this);
+                alert.setMessage(notify)
                         /*.setNegativeButton(getString(R.string.ok_btn), null)*/
                         .setCancelable(true)
                         .show();
@@ -114,12 +156,10 @@ public class Home extends AppCompatActivity
             @Override
             public void onClick(View v) {
 
-                String titleText = getString(R.string.commingsoon);
-                AlertDialog.Builder builder = new AlertDialog.Builder(Home.this);
-                builder.setMessage(titleText)
-                        /*.setNegativeButton(getString(R.string.ok_btn), null)*/
-                        .setCancelable(true)
-                        .show();
+                Intent i = new Intent(getApplicationContext(), WebviewActivity.class);
+                i.putExtra("url", (alumni));
+                setTitle("Alumni Member");
+                startActivity(i);
             }
         });
 
@@ -143,20 +183,6 @@ public class Home extends AppCompatActivity
     private void doAction(Class c) {
         startActivity(new Intent(this, c));
         this.action++;
-        if (this.action > 1) {
-
-        }
-    }
-
-    public void Executive (View view) {
-        doAction(ExecutiveMember.class);
-    }
-    public void Notify (View view) {
-        doAction(Notification.class);
-    }
-
-    public void General (View view) {
-        doAction(GeneralMember.class);
     }
 
     public void About(View view) {
@@ -185,18 +211,15 @@ public class Home extends AppCompatActivity
     }
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        MenuItem menuItem = menu.findItem(R.id.pro);
-        menuItem.setVisible(false);
+        MenuItem menuItem1 = menu.findItem(R.id.pro);
+        menuItem1.setVisible(false);
+
         return true;
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
 
-            case R.id.notify:
-                Intent n = new Intent(Home.this, Notification.class);
-                startActivity(n);
-                return true;
             case R.id.nav_about_app:
                 Intent h = new Intent(Home.this, AboutApp.class);
                 startActivity(h);
@@ -218,37 +241,37 @@ public class Home extends AppCompatActivity
         //here is the main place where we need to work on.
         int id = item.getItemId();
         switch (id) {
-            case R.id.Notification:
-                Intent n = new Intent(Home.this, Notification.class);
-                startActivity(n);
-                break;
             case R.id.nav_home:
                 Intent h = new Intent(Home.this, Home.class);
                 startActivity(h);
                 break;
+            case R.id.Notification:
+                Intent i = new Intent(getApplicationContext(), WebviewActivity.class);
+                i.putExtra("url", (notice));
+                startActivity(i);
+                break;
             case R.id.alumni:
-                String AText = getString(R.string.commingsoon);
-                AlertDialog.Builder Abuilder = new AlertDialog.Builder(Home.this);
-                Abuilder.setMessage(AText)
-                        /*.setNegativeButton(getString(R.string.ok_btn), null)*/
-                        .setCancelable(true)
-                        .show();
+                Intent aa = new Intent(getApplicationContext(), WebviewActivity.class);
+                aa.putExtra("url", (alumni));
+                startActivity(aa);
                 break;
             case R.id.adviser:
-                String VText = getString(R.string.commingsoon);
-                AlertDialog.Builder Vbuilder = new AlertDialog.Builder(Home.this);
-                Vbuilder.setMessage(VText)
+                String notify = getString(R.string.commingsoon);
+                AlertDialog.Builder alert = new AlertDialog.Builder(Home.this);
+                alert.setMessage(notify)
                         /*.setNegativeButton(getString(R.string.ok_btn), null)*/
                         .setCancelable(true)
                         .show();
                 break;
             case R.id.ExecutiveMember:
-                Intent i = new Intent(Home.this, ExecutiveMember.class);
-                startActivity(i);
+                Intent ie = new Intent(getApplicationContext(), WebviewActivity.class);
+                ie.putExtra("url", (executive));
+                startActivity(ie);
                 break;
             case R.id.GeneralMember:
-                Intent s = new Intent(Home.this, GeneralMember.class);
-                startActivity(s);
+                Intent gi = new Intent(getApplicationContext(), WebviewActivity.class);
+                gi.putExtra("url", (general));
+                startActivity(gi);
                 break;
 
             case R.id.nav_update:

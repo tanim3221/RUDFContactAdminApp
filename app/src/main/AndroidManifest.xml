@@ -5,6 +5,8 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -13,7 +15,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ProfileActivity"></activity>
+        <activity android:name=".WebviewActivity"></activity>
+        <activity android:name=".ProfileActivity" />
         <activity
             android:name=".SplashActivity"
             android:configChanges="keyboard|keyboardHidden|locale|orientation|screenSize"
@@ -51,43 +54,9 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ExecutiveMember"
-            android:configChanges="keyboard|keyboardHidden|locale|orientation|screenSize"
-            android:label="@string/ExecutiveMember"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme"
-            android:windowSoftInputMode="adjustResize">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".GeneralMember"
-            android:configChanges="keyboard|keyboardHidden|locale|orientation|screenSize"
-            android:label="@string/GeneralMember"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-            </intent-filter>
-        </activity>
-        <activity
             android:name=".About"
             android:configChanges="keyboard|keyboardHidden|locale|orientation|screenSize"
             android:label="@string/title_about"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".Notification"
-            android:configChanges="keyboard|keyboardHidden|locale|orientation|screenSize"
-            android:label="@string/notifications"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize">

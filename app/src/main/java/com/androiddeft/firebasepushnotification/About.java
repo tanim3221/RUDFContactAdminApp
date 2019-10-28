@@ -34,6 +34,11 @@ public class About extends AppCompatActivity
     DrawerLayout drawer;
     NavigationView navigationView;
     Toolbar toolbar = null;
+    String alumni = "http://rudf.6te.net/webapp/database/view/alumni.php";
+    String executive = "http://rudf.6te.net/webapp/database/view/executive.php";
+    String general = "http://rudf.6te.net/webapp/database/view/member.php";
+    String adviser = "http://rudf.6te.net/webapp/database/view/adviser.php";
+    String notice = "http://rudf.6te.net/webapp/database/view/notice.php";
     String fbapp = "fb://group/49880688703";
     String fburl = "https://www.facebook.com/groups/bfdf.ru/";
     String pageApp = "fb://page/169680089735915";
@@ -78,35 +83,7 @@ public class About extends AppCompatActivity
         setSupportActionBar(toolbar);
         liContext = this.getApplicationContext();
         FrameLayout frameLayout = findViewById(R.id.layout);
-       /* TextView textView1 = frameLayout.findViewById(R.id.version);
-        textView1.setText("Version: " + AppUtils.getVersionName(this));*/
-      /*  FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (isNetworkStatusAvialable(getApplicationContext())) {
-                    if (isAppInstalled(liContext, "com.facebook.orca") || isAppInstalled(liContext, "com.facebook.katana")
-                            || isAppInstalled(liContext, "com.example.facebook") || isAppInstalled(liContext, "com.facebook.android")) {
-                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(fbapp)));
-                    } else {
-                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(fburl)));
-                    }
 
-                } else {
-                    String titleText = getString(R.string.fb_grp);
-                    ForegroundColorSpan foregroundColorSpan = new ForegroundColorSpan(Color.rgb(140, 140, 140));
-                    SpannableStringBuilder color = new SpannableStringBuilder(titleText);
-                    color.setSpan(foregroundColorSpan, 0, titleText.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                    AlertDialog.Builder builder = new AlertDialog.Builder(About.this);
-                    builder.setTitle(getString(R.string.connect_net))
-                            .setMessage(color)
-                            *//*   .setNegativeButton(getString(R.string.ok_btn), null)*//*
-                            .setCancelable(true)
-                            .show();
-                }
-            }
-        });
-*/
         drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -141,16 +118,16 @@ public class About extends AppCompatActivity
         item.setVisible(false);*/
         return true;
     }
-
+  /* @Override
+     public boolean onPrepareOptionsMenu(Menu menu) {
+         MenuItem menuItem = menu.findItem(R.id.refresh);
+         menuItem.setVisible(false);
+         return true;
+     }*/
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-
-            case R.id.notify:
-                Intent n = new Intent(About.this, Notification.class);
-                startActivity(n);
-                return true;
             case R.id.nav_about_app:
                 Intent h = new Intent(About.this, AboutApp.class);
                 startActivity(h);
@@ -172,38 +149,39 @@ public class About extends AppCompatActivity
         //here is the main place where we need to work on.
         int id = item.getItemId();
         switch (id) {
-            case R.id.Notification:
-                Intent n = new Intent(About.this, Notification.class);
-                startActivity(n);
-                break;
             case R.id.nav_home:
                 Intent h = new Intent(About.this, Home.class);
                 startActivity(h);
                 break;
+            case R.id.Notification:
+                Intent i = new Intent(getApplicationContext(), WebviewActivity.class);
+                i.putExtra("url", (notice));
+                startActivity(i);
+                break;
             case R.id.alumni:
-                String AText = getString(R.string.commingsoon);
-                AlertDialog.Builder Abuilder = new AlertDialog.Builder(About.this);
-                Abuilder.setMessage(AText)
-                        /*.setNegativeButton(getString(R.string.ok_btn), null)*/
-                        .setCancelable(true)
-                        .show();
+                Intent aa = new Intent(getApplicationContext(), WebviewActivity.class);
+                aa.putExtra("url", (alumni));
+                startActivity(aa);
                 break;
             case R.id.adviser:
-                String VText = getString(R.string.commingsoon);
-                AlertDialog.Builder Vbuilder = new AlertDialog.Builder(About.this);
-                Vbuilder.setMessage(VText)
+                String notify = getString(R.string.commingsoon);
+                AlertDialog.Builder alert = new AlertDialog.Builder(About.this);
+                alert.setMessage(notify)
                         /*.setNegativeButton(getString(R.string.ok_btn), null)*/
                         .setCancelable(true)
                         .show();
                 break;
             case R.id.ExecutiveMember:
-                Intent i = new Intent(About.this, ExecutiveMember.class);
-                startActivity(i);
+                Intent ie = new Intent(getApplicationContext(), WebviewActivity.class);
+                ie.putExtra("url", (executive));
+                startActivity(ie);
                 break;
             case R.id.GeneralMember:
-                Intent s = new Intent(About.this, GeneralMember.class);
-                startActivity(s);
+                Intent gi = new Intent(getApplicationContext(), WebviewActivity.class);
+                gi.putExtra("url", (general));
+                startActivity(gi);
                 break;
+
 
             case R.id.nav_update:
                 if (isNetworkStatusAvialable(getApplicationContext())) {

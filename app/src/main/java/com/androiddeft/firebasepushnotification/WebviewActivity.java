@@ -4,6 +4,7 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
@@ -41,14 +42,19 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.blog.library.UpdateChecker;
 import com.google.android.material.navigation.NavigationView;
 
-public class Notification extends AppCompatActivity
+public class WebviewActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     DrawerLayout drawer;
     NavigationView navigationView;
     Toolbar toolbar = null;
+    private WebView webView = null;
     private SwipeRefreshLayout swipeRefreshLayout;
-    private String currentUrl = "http://rudf.6te.net/webapp/database/view/notice.php";
+    String alumni = "http://rudf.6te.net/webapp/database/view/alumni.php";
+    String executive = "http://rudf.6te.net/webapp/database/view/executive.php";
+    String general = "http://rudf.6te.net/webapp/database/view/member.php";
+    String adviser = "http://rudf.6te.net/webapp/database/view/adviser.php";
+    String notice = "http://rudf.6te.net/webapp/database/view/notice.php";
     String fbapp = "fb://group/49880688703";
     String fburl = "https://www.facebook.com/groups/bfdf.ru/";
     String pageApp = "fb://page/169680089735915";
@@ -82,25 +88,26 @@ public class Notification extends AppCompatActivity
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                     WindowManager.LayoutParams.FLAG_FULLSCREEN);
         }
-        setContentView(R.layout.activity_notification);
+        setContentView(R.layout.activity_webview);
         if (!SharedPrefManager.getInstance(this).isLoggedIn()) {
             finish();
             startActivity(new Intent(this, LoginActivity.class));
         }
-        hideitem();
+        String url = getIntent().getExtras().getString("url");
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         liContext = this.getApplicationContext();
-        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
-        swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
+        FrameLayout frameLayout = findViewById(R.id.layout);
+        final WebView webView = frameLayout.findViewById(R.id.webView);
+        /*  final ProgressBar progress = frameLayout.findViewById(R.id.progress);*/
+        final SwipeRefreshLayout swipeRefreshLayout = frameLayout.findViewById(R.id.swipe);
+        swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                LoadWeb(currentUrl);
+                webView.reload();
             }
         });
-        LoadWeb("http://rudf.6te.net/webapp/database/view/notice.php");
-
         drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -109,49 +116,44 @@ public class Notification extends AppCompatActivity
 
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-    }
-        public void LoadWeb(String url) {
-            FrameLayout frameLayout = findViewById(R.id.layout);
-        final WebView webView = frameLayout.findViewById(R.id.webView);
-        final ProgressBar progress = frameLayout.findViewById(R.id.progress);
-        //progressbar tinting color
+
+
+       /* //progressbar tinting color
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
             Drawable wrapDrawable = DrawableCompat.wrap(progress.getIndeterminateDrawable());
             DrawableCompat.setTint(wrapDrawable, ContextCompat.getColor(getApplicationContext(),
-                    R.color.colorAccent));
+                    R.color.colorPrimary));
             progress.setIndeterminateDrawable(DrawableCompat.unwrap(wrapDrawable));
 
         } else {
-            progress.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent), PorterDuff.Mode.SRC_IN);
+            progress.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
         }
-        //progressbar tinting color
-            WebSettings webSettings = webView.getSettings();
-            webView.getSettings().setSupportZoom(false);
-            webView.getSettings().setBuiltInZoomControls(false);
-            webView.getSettings().setDisplayZoomControls(false);
-            webView.getSettings().setLoadWithOverviewMode(true);
-            webView.getSettings().setUseWideViewPort(true);
-            webView.getSettings().setJavaScriptEnabled(true);
-            webView.getSettings().setAppCacheMaxSize(10 * 1024 * 1024);
-            webView.getSettings().setAppCachePath(getApplicationContext().getCacheDir().getAbsolutePath());
-            webView.getSettings().setAllowFileAccess(true);
-            webView.getSettings().setAppCacheEnabled(true);
-            webView.setScrollBarStyle(WebView.SCROLLBARS_INSIDE_OVERLAY);
-            webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
-            webView.setScrollbarFadingEnabled(true);
-            if (isNetworkStatusAvialable(getApplicationContext())) {
-                webView.getSettings().setCacheMode(WebSettings.LOAD_DEFAULT);
-            } else {
-                webView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ONLY);
-            }
-
+        //progressbar tinting color*/
+        WebSettings webSettings = webView.getSettings();
+        webView.getSettings().setSupportZoom(false);
+        webView.getSettings().setBuiltInZoomControls(false);
+        webView.getSettings().setDisplayZoomControls(false);
+        webView.getSettings().setLoadWithOverviewMode(true);
+        webView.getSettings().setUseWideViewPort(true);
+        webView.getSettings().setJavaScriptEnabled(true);
+        webView.getSettings().setAppCacheMaxSize(10 * 1024 * 1024);
+        webView.getSettings().setAppCachePath(getApplicationContext().getCacheDir().getAbsolutePath());
+        webView.getSettings().setAllowFileAccess(true);
+        webView.getSettings().setAppCacheEnabled(true);
+        webView.setScrollBarStyle(WebView.SCROLLBARS_INSIDE_OVERLAY);
+        webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+        webView.setScrollbarFadingEnabled(true);
+        if (isNetworkStatusAvialable(getApplicationContext())) {
+            webView.getSettings().setCacheMode(WebSettings.LOAD_DEFAULT);
+        } else {
+            webView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ONLY);
+        }
         webView.setWebViewClient(new WebViewClient());
         webView.loadUrl(url);
         webView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
                 return true;
-
             }
 
         });
@@ -172,11 +174,8 @@ public class Notification extends AppCompatActivity
             }
 
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                String defaulturl = "http://rudf.6te.net/webapp/database/view/notice.php";
-                currentUrl = url;
-                if (url != null && url.startsWith(defaulturl)) {
-                    return false;
-                } else if (url.startsWith("tel:")) {
+
+                if (url.startsWith("tel:")) {
                     Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse(url));
                     startActivity(intent);
 
@@ -197,7 +196,7 @@ public class Notification extends AppCompatActivity
                         ForegroundColorSpan foregroundColorSpan = new ForegroundColorSpan(Color.rgb(140, 140, 140));
                         SpannableStringBuilder color = new SpannableStringBuilder(titleText);
                         color.setSpan(foregroundColorSpan, 0, titleText.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                        AlertDialog.Builder builder = new AlertDialog.Builder(Notification.this);
+                        AlertDialog.Builder builder = new AlertDialog.Builder(WebviewActivity.this);
                         builder.setTitle(getString(R.string.connect_net))
                                 .setMessage(color)
                                 /*   .setNegativeButton(getString(R.string.ok_btn), null)*/
@@ -223,7 +222,7 @@ public class Notification extends AppCompatActivity
                         ForegroundColorSpan foregroundColorSpan = new ForegroundColorSpan(Color.rgb(140, 140, 140));
                         SpannableStringBuilder color = new SpannableStringBuilder(titleText);
                         color.setSpan(foregroundColorSpan, 0, titleText.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                        AlertDialog.Builder builder = new AlertDialog.Builder(Notification.this);
+                        AlertDialog.Builder builder = new AlertDialog.Builder(WebviewActivity.this);
                         builder.setTitle(getString(R.string.connect_net))
                                 .setMessage(color)
                                 /*  .setNegativeButton(getString(R.string.ok_btn), null)*/
@@ -241,21 +240,18 @@ public class Notification extends AppCompatActivity
 
             }
 
-            public void onPageFinished(WebView view, String url) {
-                progress.setVisibility(View.GONE);
-                swipeRefreshLayout.setRefreshing(false);
+            public void onPageStarted(WebView view, String url, Bitmap favicon) {
+                super.onPageStarted(view, url, favicon);
+                swipeRefreshLayout.setRefreshing(true);
+
 
             }
 
+            public void onPageFinished(WebView view, String url) {
+                swipeRefreshLayout.setRefreshing(false);
+                super.onPageFinished(view, url);
+            }
         });
-
-
-    }
-
-    private void hideitem() {
-        navigationView = findViewById(R.id.nav_view);
-        Menu drawer_menu = navigationView.getMenu();
-        drawer_menu.findItem(R.id.Notification).setChecked(true).setEnabled(false);
     }
 
     @Override
@@ -275,26 +271,22 @@ public class Notification extends AppCompatActivity
         return true;
     }
 
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        MenuItem menuItem = menu.findItem(R.id.notify);
-        menuItem.setVisible(false);
-        return true;
-    }
+    /* @Override
+     public boolean onPrepareOptionsMenu(Menu menu) {
+         MenuItem menuItem = menu.findItem(R.id.notify);
+         menuItem.setVisible(false);
+         return true;
+     }*/
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
 
-            case R.id.notify:
-                Intent n = new Intent(Notification.this, Notification.class);
-                startActivity(n);
-                return true;
             case R.id.nav_about_app:
-                Intent h = new Intent(Notification.this, AboutApp.class);
+                Intent h = new Intent(WebviewActivity.this, AboutApp.class);
                 startActivity(h);
                 return true;
             case R.id.pro:
-                Intent p = new Intent(Notification.this, ProfileActivity.class);
+                Intent p = new Intent(WebviewActivity.this, ProfileActivity.class);
                 startActivity(p);
                 return true;
 
@@ -310,48 +302,48 @@ public class Notification extends AppCompatActivity
         //here is the main place where we need to work on.
         int id = item.getItemId();
         switch (id) {
-            case R.id.Notification:
-                Intent n = new Intent(Notification.this, Notification.class);
-                startActivity(n);
-                break;
             case R.id.nav_home:
-                Intent h = new Intent(Notification.this, Home.class);
+                Intent h = new Intent(WebviewActivity.this, Home.class);
                 startActivity(h);
                 break;
+            case R.id.Notification:
+                Intent i = new Intent(getApplicationContext(), WebviewActivity.class);
+                i.putExtra("url", (notice));
+                startActivity(i);
+                break;
             case R.id.alumni:
-                String AText = getString(R.string.commingsoon);
-                AlertDialog.Builder Abuilder = new AlertDialog.Builder(Notification.this);
-                Abuilder.setMessage(AText)
-                        /*.setNegativeButton(getString(R.string.ok_btn), null)*/
-                        .setCancelable(true)
-                        .show();
+                Intent aa = new Intent(getApplicationContext(), WebviewActivity.class);
+                aa.putExtra("url", (alumni));
+                startActivity(aa);
                 break;
             case R.id.adviser:
-                String VText = getString(R.string.commingsoon);
-                AlertDialog.Builder Vbuilder = new AlertDialog.Builder(Notification.this);
-                Vbuilder.setMessage(VText)
+                String notify = getString(R.string.commingsoon);
+                AlertDialog.Builder alert = new AlertDialog.Builder(WebviewActivity.this);
+                alert.setMessage(notify)
                         /*.setNegativeButton(getString(R.string.ok_btn), null)*/
                         .setCancelable(true)
                         .show();
                 break;
             case R.id.ExecutiveMember:
-                Intent i = new Intent(Notification.this, ExecutiveMember.class);
-                startActivity(i);
+                Intent ie = new Intent(getApplicationContext(), WebviewActivity.class);
+                ie.putExtra("url", (executive));
+                startActivity(ie);
                 break;
             case R.id.GeneralMember:
-                Intent s = new Intent(Notification.this, GeneralMember.class);
-                startActivity(s);
+                Intent gi = new Intent(getApplicationContext(), WebviewActivity.class);
+                gi.putExtra("url", (general));
+                startActivity(gi);
                 break;
 
             case R.id.nav_update:
                 if (isNetworkStatusAvialable(getApplicationContext())) {
-                    UpdateChecker.checkForDialog(Notification.this);
+                    UpdateChecker.checkForDialog(WebviewActivity.this);
                 } else {
                     String titleText = getString(R.string.check_new_update_error);
                     ForegroundColorSpan foregroundColorSpan = new ForegroundColorSpan(Color.rgb(140, 140, 140));
                     SpannableStringBuilder color = new SpannableStringBuilder(titleText);
                     color.setSpan(foregroundColorSpan, 0, titleText.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                    AlertDialog.Builder builder = new AlertDialog.Builder(Notification.this);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(WebviewActivity.this);
                     builder.setTitle(getString(R.string.connect_net))
                             .setMessage(color)
                             /*.setNegativeButton(getString(R.string.ok_btn), null)*/
@@ -370,7 +362,7 @@ public class Notification extends AppCompatActivity
                 startActivity(Intent.createChooser(shareIntent, (getString(R.string.share))));
                 break;
             case R.id.nav_about:
-                Intent a = new Intent(Notification.this, About.class);
+                Intent a = new Intent(WebviewActivity.this, About.class);
                 startActivity(a);
                 break;
 
@@ -388,7 +380,7 @@ public class Notification extends AppCompatActivity
                     ForegroundColorSpan foregroundColorSpan = new ForegroundColorSpan(Color.rgb(140, 140, 140));
                     SpannableStringBuilder color = new SpannableStringBuilder(titleText);
                     color.setSpan(foregroundColorSpan, 0, titleText.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                    AlertDialog.Builder builder = new AlertDialog.Builder(Notification.this);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(WebviewActivity.this);
                     builder.setTitle(getString(R.string.connect_net))
                             .setMessage(color)
                             /*.setNegativeButton(getString(R.string.ok_btn), null)*/
@@ -411,7 +403,7 @@ public class Notification extends AppCompatActivity
                     ForegroundColorSpan foregroundColorSpan = new ForegroundColorSpan(Color.rgb(140, 140, 140));
                     SpannableStringBuilder color = new SpannableStringBuilder(titleText);
                     color.setSpan(foregroundColorSpan, 0, titleText.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                    AlertDialog.Builder builder = new AlertDialog.Builder(Notification.this);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(WebviewActivity.this);
                     builder.setTitle(getString(R.string.connect_net))
                             .setMessage(color)
                             /* .setNegativeButton(getString(R.string.ok_btn), null)*/
@@ -422,9 +414,9 @@ public class Notification extends AppCompatActivity
             case R.id.nav_feedback:
                 Intent intent = new Intent(Intent.ACTION_SEND);
                 intent.setType("text/email");
-                intent.putExtra(Intent.EXTRA_EMAIL, new String[] {getString(R.string.feedbackMail)});
+                intent.putExtra(Intent.EXTRA_EMAIL, new String[]{getString(R.string.feedbackMail)});
                 intent.putExtra(Intent.EXTRA_SUBJECT, (getString(R.string.feedbacksub)));
-                intent.putExtra(Intent.EXTRA_TEXT,(getString(R.string.msg_feedback)));
+                intent.putExtra(Intent.EXTRA_TEXT, (getString(R.string.msg_feedback)));
                 startActivity(Intent.createChooser(intent, (getString(R.string.feedTitle))));
                 break;
         }
