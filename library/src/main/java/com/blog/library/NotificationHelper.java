@@ -30,7 +30,7 @@ public class NotificationHelper extends ContextWrapper {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 
-            NotificationChannel mChannel = new NotificationChannel(CHANNEL_ID, (getString(R.string.notify_title)), NotificationManager.IMPORTANCE_HIGH);
+            NotificationChannel mChannel = new NotificationChannel(CHANNEL_ID, (getString(R.string.notify_title)), NotificationManager.IMPORTANCE_DEFAULT);
             mChannel.setDescription(getString(R.string.android_auto_update_notify_ticker));
             mChannel.enableLights(true); //Whether to display a small red dot in the upper right corner of the desktop icon
             getManager().createNotificationChannel(mChannel);
@@ -74,13 +74,10 @@ public class NotificationHelper extends ContextWrapper {
                 .setTicker(getString(R.string.android_auto_update_notify_ticker))
                 .setContentTitle(getString(R.string.android_auto_update_content))
                 .setContentText(text)
-                .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
-                .setVibrate(new long[]{1000, 1000, 1000, 1000, 1000})
-                .setLights(Color.RED, 3000, 3000)
                 .setSmallIcon(getSmallIcon())
                 .setLargeIcon(getLargeIcon())
                 .setAutoCancel(true)
-                .setPriority(NotificationCompat.PRIORITY_HIGH);
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
 
     }
 
