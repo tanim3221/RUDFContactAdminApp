@@ -149,8 +149,30 @@ public class WebActivity extends AppCompatActivity {
             @Override
             public void onReceivedError(WebView view, int errorCode, String description,
                                         String failingUrl) {
-                webView.loadUrl("about:blank");
-                super.onReceivedError(view, errorCode, description, failingUrl);
+                if (isNetworkStatusAvialable(getApplicationContext())) {
+                    webView.reload();
+                } else {
+                    webView.loadUrl("about:blank");
+                    String titleText = getString(R.string.admin_error);
+                    ForegroundColorSpan foregroundColorSpan = new ForegroundColorSpan(Color.rgb(140, 140, 140));
+                    SpannableStringBuilder color = new SpannableStringBuilder(titleText);
+                    color.setSpan(foregroundColorSpan, 0, titleText.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(WebActivity.this);
+                    builder.setTitle(getString(R.string.connect_net))
+                            .setMessage(color)
+                            .setIcon(getResources().getDrawable(R.drawable.ic_wifi_off))
+                            .setNegativeButton(getString(R.string.cancel), null)
+                            .setPositiveButton(getString(R.string.retry), new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    finish();
+                                    startActivity(getIntent());
+                                }
+                            })
+                            .setCancelable(false)
+                            .show();
+                    super.onReceivedError(view, errorCode, description, failingUrl);
+                }
             }
 
             @Override

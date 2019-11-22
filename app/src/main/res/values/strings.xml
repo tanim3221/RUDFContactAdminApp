@@ -72,5 +72,8 @@
     <string name="open_rudf_contact">Open RUDF Contact</string>
     <string name="share_app">Share app</string>
     <string name="check_new_update">Check new update</string>
+    <string name="admin_error">Turn on mobile data or Wi-Fi to access RUDF Admin Panel</string>
+    <string name="cancel">CANCEL</string>
+    <string name="retry">RETRY</string>
 
 </resources>

@@ -155,7 +155,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="jar:file:/E:/SOFTWARES/AndroidStudio/android-studio-ide-182.5314842-windows/android-studio/plugins/android/lib/android.jar!/images/material_design_icons/action/ic_supervisor_account_black_24dp.xml" />
+                                      <entry key="url" value="jar:file:/E:/SOFTWARES/AndroidStudio/android-studio-ide-182.5314842-windows/android-studio/plugins/android/lib/android.jar!/images/material_design_icons/communication/ic_portable_wifi_off_black_24dp.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -165,7 +165,7 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputName" value="ic_supervisor" />
+                            <entry key="outputName" value="ic_wifi_off" />
                             <entry key="sourceFile" value="C:\Users\SAKLAYEN TANIM" />
                           </map>
                         </option>
