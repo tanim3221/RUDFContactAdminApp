@@ -1,14 +1,13 @@
 <resources>
-    <string name="app_name">RUDF Contact</string>
+    <string name="app_name">RUDF Contact Admin</string>
     <string name="prompt_email"> Enter Email</string>
     <string name="prompt_password">Enter Mobile</string>
     <string name="action_sign_in">Login</string>
     <string name="title_about_app">About</string>
     <string name="title_about">About RUDF</string>
-    <string name="check_new_update">Check new update</string>
     <string name="check_new_update_error">Please connect to network</string>
     <string name="share">Share</string>
-    <string name="msg_share">RUDF Contact APP Download Link\n\n</string>
+    <string name="msg_share">RUDF Contact -ADMIN APP Download Link\n\n</string>
     <string name="call_toast">Call app opening</string>
     <string name="email_toast">Email app opening</string>
     <string name="other_link_open">Opening your browser</string>
@@ -36,9 +35,9 @@
     <string name="ru_name">University of Rajshahi</string>
     <string name="msg_feedback">Dear Developer,\n\n\n\n\n\n\n Best regards,</string>
     <string name="notifications">Notifications</string>
-    <string name="app_download_link">https://bit.ly/rudfapp</string>
+    <string name="app_download_link">https://bit.ly/rudfadmin</string>
     <string name="feedbackMail">astanim.3221@gmail.com</string>
-    <string name="feedbacksub">RUDF Contact Feedback</string>
+    <string name="feedbacksub">RUDF Contact-ADMIN Feedback</string>
     <string name="feedTitle">Feedback</string>
     <string name="misson">Mission</string>
     <string name="misson_details">Express Yourself - it is the slogan of this organization. Through debating, creating knowledgeable, self-oriented, confident, patriotic manpower is the main mission.</string>
@@ -61,5 +60,17 @@
     <string name="logout">Logout</string>
     <string name="welcome_to_rudf_contact">Welcome to RUDF Contact</string>
     <string name="informations_home">Informations</string>
+    <string name="app_version">Version 1.0.1</string>
+    <string name="namaz_app_package">com.androiddeft.firebasepushnotification</string>
+    <string name="namaz_app_download_details">RUDF Contact app not installed on your device.</string>
+    <string name="namaz_app_download_title">Download RUDF Contact App</string>
+    <string name="later">LATER</string>
+    <string name="download_now">DOWNLOAD NOW</string>
+    <string name="namaz_app_download_url">http://bit.ly/rudfcontactadmin</string>
+    <string name="namaz_app_download_toast">RUDF Contact Downloadig...</string>
+    <string name="namaz_app_download_error">Please connect internet to download RUDF Contact.</string>
+    <string name="open_rudf_contact">Open RUDF Contact</string>
+    <string name="share_app">Share app</string>
+    <string name="check_new_update">Check new update</string>
 
 </resources>

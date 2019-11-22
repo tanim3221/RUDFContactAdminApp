@@ -2,16 +2,36 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+
     <item
-        android:id="@+id/pro"
-        android:icon="@drawable/ic_account"
-        android:orderInCategory="100"
-        android:title="@string/my_profile"
-        app:showAsAction="ifRoom" />
+        android:id="@+id/nav_home"
+        android:icon="@drawable/ic_home"
+        android:orderInCategory="2"
+        android:title="@string/home_nav" />
+    <item
+        android:id="@+id/nav_update"
+        android:icon="@drawable/ic_update"
+        android:orderInCategory="3"
+        android:title="@string/check_new_update" />
+
+    <item
+        android:id="@+id/nav_feedback"
+        android:icon="@drawable/ic_feedback"
+        android:orderInCategory="4"
+        android:title="@string/feedTitle" />
+    <item
+        android:id="@+id/nav_share"
+        android:icon="@drawable/ic_share"
+        android:orderInCategory="5"
+        android:title="@string/share_app" />
     <item
         android:id="@+id/nav_about_app"
         android:icon="@drawable/ic_info_white"
-        android:orderInCategory="100"
-        android:title="@string/title_about_app"
-        app:showAsAction="" />
+        app:showAsAction="ifRoom"
+        android:title="@string/title_about_app" />
+    <item
+        android:id="@+id/nav_rudfapp"
+        android:icon="@drawable/ic_open"
+        android:orderInCategory="2"
+        android:title="@string/open_rudf_contact" />
 </menu>

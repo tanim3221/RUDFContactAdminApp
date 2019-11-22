@@ -8,29 +8,25 @@
         android:icon="@drawable/ic_home"
         android:title="@string/home_nav" />
 
-    <item android:title="@string/information">
-        <menu>
-            <item
-                android:id="@+id/adviser"
-                android:icon="@drawable/ic_adviser"
-                android:title="@string/AdviserMember" />
-            <item
-                android:id="@+id/alumni"
-                android:icon="@drawable/ic_alumni"
-                android:title="@string/AlumniMember" />
+    <item
+        android:id="@+id/admin"
+        android:icon="@drawable/ic_person"
+        android:title="Master Admin" />
 
-            <item
-                android:id="@+id/ExecutiveMember"
-                android:icon="@drawable/ic_supervisor"
-                android:title="@string/ExecutiveMember" />
+    <item
+        android:id="@+id/editor"
+        android:icon="@drawable/ic_person_edit"
+        android:title="Editor" />
+    <item
+        android:id="@+id/add_member"
+        android:icon="@drawable/ic_add"
+        android:title="Add Member" />
 
-            <item
-                android:id="@+id/GeneralMember"
-                android:icon="@drawable/ic_general"
-                android:title="@string/GeneralMember" />
+    <item
+        android:id="@+id/rudfapp"
+        android:icon="@drawable/ic_open"
+        android:title="Open RUDF Contact" />
 
-           </menu>
-    </item>
 
     <item android:title="@string/facebook">
         <menu>
@@ -45,30 +41,26 @@
                 android:title="@string/FacebookGroup" />
         </menu>
     </item>
-            <item android:title="@string/others">
-            <menu>
-                <item
-                    android:id="@+id/Notification"
-                    android:icon="@drawable/ic_notifications"
-                    android:title="@string/notifications" />
+    <item android:title="@string/others">
+        <menu>
+
             <item
                 android:id="@+id/nav_update"
                 android:icon="@drawable/ic_update"
                 android:title="@string/check_new_update" />
 
-                <item
-                    android:id="@+id/nav_feedback"
-                    android:icon="@drawable/ic_feedback"
-                    android:title="Feedback" />
-                <item
+            <item
+                android:id="@+id/nav_feedback"
+                android:icon="@drawable/ic_feedback"
+                android:title="Feedback" />
+            <item
                 android:id="@+id/nav_share"
                 android:icon="@drawable/ic_share"
                 android:title="@string/share" />
             <item
-                    android:id="@+id/nav_about"
-                    android:icon="@drawable/ic_info"
-                    android:title="@string/title_about" />
+                android:id="@+id/nav_about"
+                android:icon="@drawable/ic_info"
+                android:title="@string/title_about" />
         </menu>
     </item>
-
 </menu>

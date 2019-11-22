@@ -1,1 +1,2 @@
 include ':app', ':library'
+rootProject.name='RUDF_admin'

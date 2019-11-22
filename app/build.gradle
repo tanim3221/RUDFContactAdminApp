@@ -1,29 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
-    signingConfigs {
-        release {
-            storeFile file('..\\update\\rudf.jks')
-            storePassword '123456'
-            keyAlias = 'key0'
-            keyPassword '123456'
-        }
-        debug {
-            storeFile file('..\\update\\rudf.jks')
-            storePassword '123456'
-            keyAlias = 'key0'
-            keyPassword '123456'
-        }
-    }
-    compileSdkVersion 28
+    compileSdkVersion 29
     defaultConfig {
-        applicationId "com.androiddeft.firebasepushnotification"
-        minSdkVersion 17
-        targetSdkVersion 28
-        versionCode 14
-        versionName '1.0.114'
+        applicationId "com.rudf.admin"
+        minSdkVersion 19
+        targetSdkVersion 29
+        versionCode 1
+        versionName '1.0.1'
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        signingConfig signingConfigs.release
     }
     buildTypes {
         release {
@@ -31,6 +16,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    buildToolsVersion = '29.0.2'
 }
 
 dependencies {
@@ -42,11 +28,8 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0'
     implementation 'androidx.vectordrawable:vectordrawable:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-    implementation 'com.google.firebase:firebase-messaging:11.0.4'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
 }
 
-
-apply plugin: 'com.google.gms.google-services'

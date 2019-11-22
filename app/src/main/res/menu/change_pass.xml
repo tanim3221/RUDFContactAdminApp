@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/admin_pass"
+        android:icon="@drawable/ic_person"
+        android:orderInCategory="2"
+        android:title="Admin" />
+    <item
+        android:id="@+id/editor_pass"
+        android:icon="@drawable/ic_supervisor"
+        android:orderInCategory="3"
+        android:title="Editor" />
+</menu>
