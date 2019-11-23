@@ -1,6 +1,8 @@
 package com.rudf.admin;
 
+import android.Manifest;
 import android.annotation.TargetApi;
+import android.app.DownloadManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -21,6 +23,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.webkit.CookieManager;
+import android.webkit.DownloadListener;
+import android.webkit.URLUtil;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
@@ -34,6 +39,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.menu.MenuBuilder;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -77,7 +83,7 @@ public class WebActivity extends AppCompatActivity {
         }
         setContentView(R.layout.activity_webview);
 
-        String url = getIntent().getExtras().getString("url");
+        final String url = getIntent().getExtras().getString("url");
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -123,6 +129,12 @@ public class WebActivity extends AppCompatActivity {
         webView.getSettings().setAppCacheMaxSize(10 * 1024 * 1024);
         webView.getSettings().setAppCachePath(getApplicationContext().getCacheDir().getAbsolutePath());
         webView.getSettings().setAllowFileAccess(true);
+
+        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP) {
+            webView.getSettings().setUserAgentString("Mozilla/5.0 (Linux; Android 4.4; Nexus 5 Build/_BuildID_) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/30.0.0.0 Mobile Safari/537.36");
+        } else {
+            webView.getSettings().setUserAgentString("Mozilla/5.0 (Linux; Android 5.1.1; Nexus 5 Build/LMY48B; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/43.0.2357.65 Mobile Safari/537.36");
+        }
         webView.getSettings().setAppCacheEnabled(true);
         webView.setScrollBarStyle(WebView.SCROLLBARS_INSIDE_OVERLAY);
         webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
@@ -143,6 +155,33 @@ public class WebActivity extends AppCompatActivity {
         });
 
         webView.setWebChromeClient(new WebChromeClient());
+        /*  webView.setDownloadListener(new DownloadListener() {
+            public void onDownloadStart(String url, String userAgent, String contentDisposition, String mimetype, long contentLength) {
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(url));
+                startActivity(i);
+            }
+        });*/
+
+        webView.setDownloadListener(new DownloadListener() {
+            @Override
+            public void onDownloadStart(final String url, final String userAgent, String contentDisposition, String mimetype, long contentLength) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                            == PackageManager.PERMISSION_GRANTED) {
+                        download(url, userAgent, contentDisposition, mimetype);
+
+                    } else {
+
+                        ActivityCompat.requestPermissions(WebActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+                    }
+                } else {
+
+                    download(url, userAgent, contentDisposition, mimetype);
+
+                }
+            }
+        });
 
         webView.setWebViewClient(new WebViewClient() {
 
@@ -260,6 +299,28 @@ public class WebActivity extends AppCompatActivity {
                 super.onPageFinished(view, url);
             }
         });
+
+
+        if (isNetworkStatusAvialable(getApplicationContext())) {
+            webView.loadUrl(url);
+        } else {
+            String titleText = getString(R.string.admin_error);
+            ForegroundColorSpan foregroundColorSpan = new ForegroundColorSpan(Color.rgb(140, 140, 140));
+            SpannableStringBuilder color = new SpannableStringBuilder(titleText);
+            color.setSpan(foregroundColorSpan, 0, titleText.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            AlertDialog.Builder builder = new AlertDialog.Builder(WebActivity.this);
+            builder.setTitle(getString(R.string.connect_net))
+                    .setMessage(color)
+                    .setIcon(getResources().getDrawable(R.drawable.ic_wifi_off))
+                    .setPositiveButton(getString(R.string.retry), new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            webView.loadUrl(url);
+                        }
+                    })
+                    .setCancelable(false)
+                    .show();
+        }
     }
 
     @Override
@@ -400,6 +461,55 @@ public class WebActivity extends AppCompatActivity {
         dialogBuilder.setCancelable(true);
         AlertDialog alertDialog = dialogBuilder.create();
         alertDialog.show();
+
+    }
+
+
+    public void download(final String url, final String userAgent, String contentDisposition, String mimetype) {
+
+
+        final String filename = URLUtil.guessFileName(url, contentDisposition, mimetype);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(WebActivity.this);
+        builder.setIcon(getResources().getDrawable(R.drawable.ic_file_download));
+        /* builder.setTitle("Export RUDF database");*/
+        builder.setMessage(getString(R.string.excel_file));
+        builder.setCancelable(false);
+        builder.setPositiveButton(getString(R.string.download_file_btn), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                String master_admin = "http://rudf.6te.net/webapp/database/admin/home.php";
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(master_admin));
+                startActivity(intent);
+
+                /*DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
+                String cookie = CookieManager.getInstance().getCookie(url);
+                request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+                request.addRequestHeader("Cookie", cookie);
+                request.addRequestHeader("User-Agent", userAgent);
+                request.allowScanningByMediaScanner();
+                request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+                DownloadManager downloadManager = (DownloadManager) getSystemService(DOWNLOAD_SERVICE);
+                request.setDestinationInExternalPublicDir("/RUDF Contact/files", filename);
+                downloadManager.enqueue(request);*/
+
+                String download = "Opening your default browser";
+                Toast toast = Toast.makeText(getApplicationContext(), download, Toast.LENGTH_LONG);
+                toast.show();
+
+            }
+        });
+
+        builder.setNegativeButton(getString(R.string.later), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+
+        });
+        builder.create().show();
 
     }
 }

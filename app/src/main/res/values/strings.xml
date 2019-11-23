@@ -60,7 +60,7 @@
     <string name="logout">Logout</string>
     <string name="welcome_to_rudf_contact">Welcome to RUDF Contact</string>
     <string name="informations_home">Informations</string>
-    <string name="app_version">Version 1.0.1</string>
+    <string name="app_version">Version 1.0.2</string>
     <string name="namaz_app_package">com.androiddeft.firebasepushnotification</string>
     <string name="namaz_app_download_details">RUDF Contact app not installed on your device.</string>
     <string name="namaz_app_download_title">Download RUDF Contact App</string>
@@ -75,5 +75,9 @@
     <string name="admin_error">Turn on mobile data or Wi-Fi to access RUDF Admin Panel</string>
     <string name="cancel">CANCEL</string>
     <string name="retry">RETRY</string>
+    <string name="download">Downloading</string>
+    <string name="download_file_btn">DOWNLOAD NOW</string>
+    <string name="download_file_title">Download this file</string>
+    <string name="excel_file">Export database as excel file</string>
 
 </resources>
