@@ -1,5 +1,5 @@
 {
   "url": "https://github.com/tanim3221/RUDFContactAdminApp/raw/master/app/release/app-release.apk",
-  "versionCode": 2,
-  "updateMessage": "What's new***\n\n- Some bug fix.\n- New UI update with navigation menu."
+  "versionCode": 3,
+  "updateMessage": "What's new***\n\n- Now you can download all data as excel file.\n- Some bug fix.\n- New UI update with navigation menu."
 }
